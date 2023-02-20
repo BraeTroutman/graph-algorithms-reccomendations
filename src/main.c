@@ -5,14 +5,10 @@
 
 int main(int argc, char* argv[]) {
 	am_graph graph;
-	am_graph_init(&graph, 10, 10);
-	
-	int i,j;
-	for (i = 0; i < graph.n; i++) {
-		for (j = 0; j < graph.n; j++) {
-			printf("%d\t", graph.matrix[i*graph.n + j]);
-		}
-		puts("");
-	}
+
+	am_graph_read("data/A16-edge.txt", &graph);
+
+	am_graph_print(graph);
+
 	return 0;
 }
