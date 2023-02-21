@@ -1,9 +1,14 @@
 targets=bin/main
 
-.phony: all debug
+.phony: all debug benchmarks
 all: $(targets)
 
 debug: bin/debug
+
+benchmarks: bin/strassens_benchmark
+
+bin/strassens_benchmark: build/strassens_benchmark.o build/matmul.o
+	cc -o $@ $^
 
 bin/main: build/graph.o build/main.o
 	cc -o $@ $^
