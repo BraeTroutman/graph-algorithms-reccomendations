@@ -9,10 +9,7 @@ tests: test/bin/strassens
 test/bin/strassens: build/matrix.o test/build/strassens.o
 	cc -o $@ $^
 
-bin/strassens_benchmark: build/strassens_benchmark.o build/matrix.o
-	cc -o $@ $^
-
-bin/main: build/graph.o build/main.o
+bin/main: build/graph.o build/main.o build/matrix.o
 	cc -o $@ $^
 
 bin/debug: build/graph.debug.o build/main.debug.o
