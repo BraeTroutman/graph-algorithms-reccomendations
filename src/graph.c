@@ -46,6 +46,18 @@ am_graph* am_graph_two_paths(am_graph A, am_graph B) {
 	return C;
 }
 
+void matmul(int* A, int* B, int* C, int N) {
+	int i,j,k;
+	for (i = 0; i < N; i++) {
+		for (j = 0; j < N; j++) {
+			C[i*N + j] = 0;
+			for (k = 0; k < N; k++) {
+				C[i*N + j] += A[i*N + k] * B[k*N + j];
+			}
+		}
+	}
+}
+
 void strassens(int* A, int* B, int* C, int N) {
 	if (N == 2) {
 		int M1 = (A[0] + A[3]) * (B[0] + B[3]);
@@ -97,41 +109,48 @@ void strassens(int* A, int* B, int* C, int N) {
 
 	int* temp1 = calloc(m*m, sizeof(int));
 	int* temp2 = calloc(m*m, sizeof(int));
-
+	
+	// M1 = (A11 + A22)(B11 + B22)
 	int* M1 = calloc(m*m, sizeof(int));
 	addmat(A11,A22,temp1,m);
 	addmat(B11,B22,temp2,m);
 	strassens(temp1,temp2,M1,m);
 
+	// M2 = (A21 + A22) * B11
 	int* M2 = calloc(m*m, sizeof(int));
 	addmat(A21, A22, temp1, m);
 	strassens(temp1,B11,M2, m);
 
+	// M3 = A11 * (B12 - B22)
 	int* M3 = calloc(m*m, sizeof(int));
-	submat(B21, B22, temp1, m);
+	submat(B12, B22, temp1, m);
 	strassens(A11, temp1, M3, m);
 
+	// M4 = A22 * (B21 - B11)
 	int* M4 = calloc(m*m, sizeof(int));
 	submat(B21, B11, temp1, m);
 	strassens(A22, temp1, M4, m);
 
+	// M5 = (A11 + A12) * B22
 	int* M5 = calloc(m*m, sizeof(int));
 	addmat(A11, A12, temp1, m);
 	strassens(temp1, B22, M5, m);
 
+	// M6 = (A21 - A11)(B11 + B12)
 	int* M6 = calloc(m*m, sizeof(int));
 	submat(A21, A11, temp1, m);
 	addmat(B11, B12, temp2, m);
 	strassens(temp1, temp2, M6, m);
 
+	// M7 = (A12 - A22)(B21 + B22)
 	int* M7 = calloc(m*m, sizeof(int));
 	submat(A12, A22, temp1, m);
 	addmat(B21, B22, temp2, m);
 	strassens(temp1, temp2, M7, m);
 
 	addmat(M1, M4, temp1, m);
-	addmat(M5, M7, temp2, m);
-	submat(temp1, temp2, C11, m);
+	submat(temp1, M5, temp2, m);
+	addmat(temp2, M7, C11, m);
 
 	addmat(M3, M5, C12, m);
 
