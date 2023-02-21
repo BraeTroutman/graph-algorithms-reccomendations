@@ -38,3 +38,15 @@ void am_graph_print(am_graph graph) {
 	}
 }
 
+void am_graph_2paths(am_graph graph, am_graph *result) {
+	matrix A, C;
+	initmat(&A, graph.matrix, graph.n, graph.n, 0, 0);
+	initmat(&C, calloc(graph.n*graph.n, sizeof(int)), graph.n, graph.n, 0, 0);
+	
+	result->n = graph.n;
+	result->m = graph.m;
+	strassens(A, A, C);
+
+	result->matrix = C.data;
+}
+
