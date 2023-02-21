@@ -26,16 +26,23 @@ void am_graph_read(const char *filename, am_graph* graph) {
 
 void am_graph_print(am_graph graph) {
 	int i,j;
+	
 	printf("     ");
 	for (i = 1; i <= graph.n; i++) printf("%8d", i);
-	puts("");
+	printf("\n    +");
+	for (i = 0; i < graph.n; i++) printf("--------");
+	puts("+");
 	for (i = 0; i < graph.n; i++) {
 		printf("%4d|", i+1);
 		for (j = 0; j < graph.n; j++) {
 			printf("%8d", graph.matrix[i*graph.n + j]);
 		}
-		puts("");
+		puts("|");
 	}
+
+	printf("    +");
+	for (i = 0; i < graph.n; i++) printf("--------");
+	puts("+");
 }
 
 void am_graph_2paths(am_graph graph, am_graph *result) {
