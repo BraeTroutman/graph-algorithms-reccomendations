@@ -1,5 +1,5 @@
 #include "graph.h"
-#include "matmul.h"
+#include "matrix.h"
 
 void am_graph_init(am_graph* graph, int m, int n) {
 	graph->m = m;
