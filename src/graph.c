@@ -61,7 +61,7 @@ void al_graph_init(al_graph *graph, int m, int n) {
 	graph->m = m;
 	graph->n = n;
 
-	graph->nodes = calloc(n, sizeof(int*));
+	graph->nodes = calloc(n, sizeof(int));
 	graph->num_edges = calloc(n, sizeof(int));
 	graph->edges = calloc(m, sizeof(int));
 }
@@ -80,7 +80,7 @@ void al_graph_read(const char *filename, al_graph *graph) {
 		if (src > current_node) {
 			current_node = src;
 			graph->num_edges[(src-1)] = 1;
-			graph->nodes[(src-1)] = graph->edges+i;
+			graph->nodes[(src-1)] = i;
 		} else {
 			graph->num_edges[src-1]++;
 		}
@@ -95,7 +95,7 @@ void al_graph_print(al_graph graph) {
 	for (i = 0; i < graph.n; i++) {
 		printf("%4i: ", i+1);
 		for (j = 0; j < graph.num_edges[i]; j++) {
-			printf("%5i", graph.nodes[i][j]+1);
+			printf("%5i", graph.edges[graph.nodes[i]+j]+1);
 		}
 		puts("");
 	}

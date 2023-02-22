@@ -14,7 +14,7 @@ typedef struct {
 	int m;
 	int n;
 	int *edges;
-	int **nodes;
+	int *nodes;
 	int *num_edges;
 } al_graph;
 
