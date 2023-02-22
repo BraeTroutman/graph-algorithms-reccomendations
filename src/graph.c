@@ -66,3 +66,26 @@ void al_graph_init(al_graph *graph, int m, int n) {
 	graph->edges = calloc(n, sizeof(int));
 }
 
+void al_graph_read(const char *filename, al_graph *graph) {
+	FILE* file = fopen(filename, "r");
+
+	int m, n;
+	fscanf(file, "m %d n %d", &m, &n);
+
+	al_graph_init(graph, m, n);
+
+	int i, src, dst, current_node = 0;
+	for (i = 0; i < m; i++) {
+		fscanf(file, "%d %d\n", &src, &dst);
+		if (src > current_node) {
+			current_node = src;
+			graph->num_edges[(src-1)] = 1;
+			graph->nodes[(src-1)] = graph->edges+i;
+		} else {
+			graph->edges[i] = dst-1;
+		}
+	}
+
+	fclose(file);
+}
+
