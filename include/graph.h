@@ -14,6 +14,7 @@ typedef struct {
 	int m;
 	int n;
 	int *edges;
+	int *weights;
 	int *nodes;
 	int *num_edges;
 } al_graph;
