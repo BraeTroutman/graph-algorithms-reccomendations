@@ -103,3 +103,6 @@ void al_graph_print(al_graph graph) {
 	}
 }
 
+void al_graph_2paths(al_graph graph, al_graph *result) {
+
+}
