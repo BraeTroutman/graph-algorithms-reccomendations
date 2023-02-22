@@ -110,16 +110,20 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 
 	char visited[graph.n];
 	
+	// for every node in our graph
 	for (src = 0; src < graph.n; src++) {
-		printf("node %i has %i edges\n", i+1, graph.num_edges[src]);
-		
+		// initially we've visited no 2-path neighbors
 		for (i = 0; i < graph.n; i++) visited[i] = 0;
-
+		
+		// for every neighbor of the current source node
 		for (j = 0; j < graph.num_edges[src]; j++) {
 			nbr = graph.edges[graph.nodes[src]+j];
-			printf("  one edge to node %i\n", nbr+1);
+			// for every neighbor of the current neighbor node,
+			//   i.e. every node exactly two hops away from src
 			for (k = 0; k < graph.num_edges[nbr]; k++) {
 				dst = graph.nodes[nbr]+k;
+				// if we haven't visited this node from the src yet
+				//   then we can add to the total number of edges
 				if (!visited[graph.edges[dst]]) {
 					m++;
 					visited[graph.edges[dst]] = 1;
@@ -129,5 +133,9 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 	}
 
 	printf("%i total edges in new graph\n", m);
+
+	al_graph_init(result, m, graph.n);
+
+
 }
 
