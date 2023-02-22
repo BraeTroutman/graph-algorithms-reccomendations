@@ -36,7 +36,6 @@ void am_graph_print(am_graph graph) {
 		printf("%4d|", i+1);
 		for (j = 0; j < graph.n; j++) {
 			printf("%8d", graph.matrix[i*graph.n + j]);
-			if (graph.matrix[i*graph.n + j] > 0) m++;
 		}
 		puts("|");
 	}
@@ -106,22 +105,24 @@ void al_graph_print(al_graph graph) {
 
 void al_graph_2paths(al_graph graph, al_graph *result) {
 	// pass 1 -> count the number of edges (number of total two-paths
-	int i, j, k, a, m = 0;
+	int i, j, k, m = 0;
 	int src, nbr, dst;
 
 	char visited[graph.n];
 	
-	for (i = 0; i < graph.n; i++) {
-		printf("node %i has %i edges\n", i+1, graph.num_edges[i]);
+	for (src = 0; src < graph.n; src++) {
+		printf("node %i has %i edges\n", i+1, graph.num_edges[src]);
 		
-		for (a = 0; a < graph.n; a++) visited[a] = 0;
+		for (i = 0; i < graph.n; i++) visited[i] = 0;
 
-		for (j = 0; j < graph.num_edges[i]; j++) {
-			printf("  one edge to node %i\n", graph.edges[graph.nodes[i]+j]+1);
-			for (k = 0; k < graph.num_edges[graph.edges[graph.nodes[i]+j]]; k++) {
-				if (!visited[graph.edges[graph.nodes[graph.edges[graph.nodes[i]+j]]+k]]) {
+		for (j = 0; j < graph.num_edges[src]; j++) {
+			nbr = graph.edges[graph.nodes[src]+j];
+			printf("  one edge to node %i\n", nbr+1);
+			for (k = 0; k < graph.num_edges[nbr]; k++) {
+				dst = graph.nodes[nbr]+k;
+				if (!visited[graph.edges[dst]]) {
 					m++;
-					visited[graph.edges[graph.nodes[graph.edges[graph.nodes[i]+j]]+k]] = 1;
+					visited[graph.edges[dst]] = 1;
 				}
 			}
 		}
