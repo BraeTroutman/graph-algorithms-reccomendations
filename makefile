@@ -12,7 +12,7 @@ test/bin/strassens: build/matrix.o test/build/strassens.o
 bin/main: build/graph.o build/main.o build/matrix.o
 	cc -o $@ $^
 
-bin/debug: build/graph.debug.o build/main.debug.o
+bin/debug: build/graph.debug.o build/main.debug.o build/matrix.debug.o
 	cc -o $@ -g $^
 
 build/%.debug.o: src/%.c
