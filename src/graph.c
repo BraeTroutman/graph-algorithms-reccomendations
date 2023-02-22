@@ -82,10 +82,22 @@ void al_graph_read(const char *filename, al_graph *graph) {
 			graph->num_edges[(src-1)] = 1;
 			graph->nodes[(src-1)] = graph->edges+i;
 		} else {
-			graph->edges[i] = dst-1;
+			graph->num_edges[src-1]++;
 		}
+		graph->edges[i] = dst-1;
 	}
 
 	fclose(file);
+}
+
+void al_graph_print(al_graph graph) {
+	int i, j;
+	for (i = 0; i < graph.n; i++) {
+		printf("%4i: ", i+1);
+		for (j = 0; j < graph.num_edges[i]; j++) {
+			printf("%5i", graph.nodes[i][j]+1);
+		}
+		puts("");
+	}
 }
 
