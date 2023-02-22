@@ -61,9 +61,9 @@ void al_graph_init(al_graph *graph, int m, int n) {
 	graph->m = m;
 	graph->n = n;
 
-	graph->nodes = calloc(m, sizeof(int*));
-	graph->num_edges = calloc(m, sizeof(int));
-	graph->edges = calloc(n, sizeof(int));
+	graph->nodes = calloc(n, sizeof(int*));
+	graph->num_edges = calloc(n, sizeof(int));
+	graph->edges = calloc(m, sizeof(int));
 }
 
 void al_graph_read(const char *filename, al_graph *graph) {
