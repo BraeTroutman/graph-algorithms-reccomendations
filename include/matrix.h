@@ -1,3 +1,6 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -18,4 +21,6 @@ static int matidx(matrix M, int i, int j);
 void initmat(matrix *M, int* data, int N, int n, int row_offset, int col_offset);
 void partition(matrix M, matrix *M11, matrix *M12, matrix *M21, matrix *M22);
 void printmat(matrix M);
+
+#endif
 

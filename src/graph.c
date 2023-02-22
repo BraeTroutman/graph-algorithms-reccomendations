@@ -57,3 +57,12 @@ void am_graph_2paths(am_graph graph, am_graph *result) {
 	result->matrix = C.data;
 }
 
+void al_graph_init(al_graph *graph, int m, int n) {
+	graph->m = m;
+	graph->n = n;
+
+	graph->nodes = calloc(m, sizeof(int*));
+	graph->num_edges = calloc(m, sizeof(int));
+	graph->edges = calloc(n, sizeof(int));
+}
+
