@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
 	al_graph graph2;
 	al_graph_read("data/A4-edge.txt", &graph2);
 	al_graph_print(graph2);
-
+	al_graph paths2;
+	al_graph_2paths(graph2, &paths2);
 	return 0;
 }
