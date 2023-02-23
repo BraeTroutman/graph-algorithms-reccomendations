@@ -11,22 +11,22 @@ int main(int argc, char* argv[]) {
 	am_graph_read("data/A1024-edge.txt", &am);
 
 	puts("reading to alist");
-	al_graph graph2;
-	al_graph_read("data/A1024-edge.txt", &graph2);
-	al_graph_print(graph2);
+	al_graph al;
+	al_graph_read("data/A1024-edge.txt", &al);
+	al_graph_print(al);
 	
 	puts("\ncalculating 2paths amatrix");
 	start = (float) clock();
 	puts("\nadjacency matrix two-paths");
-	am_graph paths;
-	am_graph_2paths(am, &paths);
+	am_graph am_paths;
+	am_graph_2paths(am, &am_paths);
 	mat_time = ((float) clock() - start)/1000.0f;
 	printf("took %f seconds\n", mat_time);
 
 	puts("\ncalculating 2paths alist");
 	start = (float) clock();
-	al_graph paths2;
-	al_graph_2paths(graph2, &paths2);
+	al_graph al_paths;
+	al_graph_2paths(al, &al_paths);
 	list_time = ((float) clock() - start)/1000.0f;
 	printf("took %f seconds\n", list_time);
 

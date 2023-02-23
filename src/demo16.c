@@ -9,19 +9,19 @@ int main(int argc, char* argv[]) {
 	am_graph_print(am);
 
 	puts("\ndata/A16-edge.txt adjacency list represenstation");
-	al_graph graph2;
-	al_graph_read("data/A16-edge.txt", &graph2);
-	al_graph_print(graph2);
+	al_graph al;
+	al_graph_read("data/A16-edge.txt", &al);
+	al_graph_print(al);
 
 	puts("\nadjacency matrix two-paths");
-	am_graph paths;
-	am_graph_2paths(am, &paths);
-	am_graph_print(paths);
+	am_graph am_paths;
+	am_graph_2paths(am, &am_paths);
+	am_graph_print(am_paths);
 
 	puts("\nadjacency list two-paths");
-	al_graph paths2;
-	al_graph_2paths(graph2, &paths2);
-	al_graph_print(paths2);
+	al_graph al_paths;
+	al_graph_2paths(al, &al_paths);
+	al_graph_print(al_paths);
 
 	return 0;
 }
