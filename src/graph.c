@@ -121,21 +121,45 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 			// for every neighbor of the current neighbor node,
 			//   i.e. every node exactly two hops away from src
 			for (k = 0; k < graph.num_edges[nbr]; k++) {
-				dst = graph.nodes[nbr]+k;
+				dst = graph.edges[graph.nodes[nbr]+k];
 				// if we haven't visited this node from the src yet
 				//   then we can add to the total number of edges
-				if (!visited[graph.edges[dst]]) {
+				if (!visited[dst]) {
 					m++;
-					visited[graph.edges[dst]] = 1;
+					visited[dst] = 1;
 				}
 			}
 		}
 	}
 
-	printf("%i total edges in new graph\n", m);
-
 	al_graph_init(result, m, graph.n);
 
-
+	// pass 2 -> fill the adjacency list with edges
+	
+	int edgeidx = 0;
+	for (src = 0; src < graph.n; src++) {
+		for (i = 0; i < graph.n; i++) visited[i] = 0;
+		// for every neighbor of the current source node
+		for (j = 0; j < graph.num_edges[src]; j++) {
+			nbr = graph.edges[graph.nodes[src]+j];
+			// for every neighbor of the current neighbor node,
+			//   i.e. every node exactly two hops away from src
+			for (k = 0; k < graph.num_edges[nbr]; k++) {
+				dst = graph.edges[graph.nodes[nbr]+k];
+					
+				visited[dst]++;	
+			}
+		}
+		// fill our array with our calculated edge/weight pairs
+		result->nodes[src] = edgeidx;
+		for (i = 0; i < graph.n; i++) {
+			if (visited[i]) {
+				result->edges[edgeidx] = i;
+				result->weights[edgeidx] = visited[i];
+				result->num_edges[src]++;
+				edgeidx++;
+			}
+		}
+	}
 }
 
