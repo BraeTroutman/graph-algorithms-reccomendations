@@ -35,7 +35,11 @@ void am_graph_print(am_graph graph) {
 	for (i = 0; i < graph.n; i++) {
 		printf("%4d|", i+1);
 		for (j = 0; j < graph.n; j++) {
-			printf("%8d", graph.matrix[i*graph.n + j]);
+			if (graph.matrix[i*graph.n + j] > 0) {
+				printf("\033[1m\033[32m%8d\033[0m", graph.matrix[i*graph.n + j]);
+			} else {
+				printf("%8d", graph.matrix[i*graph.n + j]);
+			}
 		}
 		puts("|");
 	}
