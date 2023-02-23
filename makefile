@@ -1,4 +1,4 @@
-targets=bin/main
+targets=bin/demo16
 
 .phony: all debug clean tests
 all: $(targets)
@@ -9,7 +9,7 @@ tests: test/bin/strassens
 test/bin/strassens: build/matrix.o test/build/strassens.o
 	cc -o $@ $^
 
-bin/main: build/graph.o build/main.o build/matrix.o
+bin/demo16: build/graph.o build/demo16.o build/matrix.o
 	cc -o $@ $^
 
 bin/debug: build/graph.debug.o build/main.debug.o build/matrix.debug.o
