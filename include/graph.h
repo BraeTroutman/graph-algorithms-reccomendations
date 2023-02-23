@@ -29,6 +29,7 @@ void al_graph_init(al_graph *graph, int m, int n);
 void al_graph_read(const char *filename, al_graph *graph);
 void al_graph_print(al_graph graph);
 void al_graph_2paths(al_graph graph, al_graph *result);
+void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges);
 
 #endif
 

@@ -177,3 +177,23 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 	}
 }
 
+void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges) {
+	int i, j;
+	int max_edge, max_weight;
+	int src_edges_idx;
+
+	for (i = 0; i < graph.n; i++) {
+		src_edges_idx = graph.nodes[i];
+		max_edge = -1; 
+		max_weight = 0;
+		for (j = 0; j < graph.num_edges[i]; j++) {
+			// check if weight at this edge is bigger than current max
+			if (graph.weights[src_edges_idx+j] > max_weight) {
+				max_weight = graph.weights[src_edges_idx+j];
+				max_edge = graph.edges[src_edges_idx+j];
+			}
+		}
+		heaviest_edges[i] = max_edge;
+	}
+}
+
