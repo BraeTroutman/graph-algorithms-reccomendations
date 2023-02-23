@@ -58,16 +58,21 @@ void am_graph_2paths(am_graph graph, am_graph *result) {
 }
 
 void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges) {
-	int i, j, updated;
+	int i, j;
+	int max_edge, max_weight;
+	int src_edges_idx;
+
 	for (i = 0; i < graph.n; i++) {
-		updated = 0;
+		max_edge = -1; 
+		max_weight = 0;
 		for (j = 0; j < graph.n; j++) {
-			if (graph.matrix[i*graph.n + j] > graph.matrix[i*graph.n + heaviest_edges[i]]) {
-				heaviest_edges[i] = j;
-				updated = 1;
+			// check if weight at this edge is bigger than current max
+			if (graph.matrix[i*graph.n + j] > max_weight) {
+				max_weight = graph.matrix[i*graph.n + j];
+				max_edge = j;
 			}
 		}
-		if (!updated) heaviest_edges[i] = -1;
+		heaviest_edges[i] = max_edge;
 	}
 }
 
