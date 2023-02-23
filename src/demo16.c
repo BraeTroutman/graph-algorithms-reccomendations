@@ -17,6 +17,11 @@ int main(int argc, char* argv[]) {
 	am_graph am_paths;
 	am_graph_2paths(am, &am_paths);
 	am_graph_print(am_paths);
+	
+	int *reccs = calloc(am_paths.n, sizeof(int));
+	am_graph_heaviest_edges(am_paths, reccs);
+	int i;
+	for (i = 0; i < am_paths.n; i++) printf("node %i's heaviest node is %i\n", i+1, reccs[i]+1);
 
 	puts("\nadjacency list two-paths");
 	al_graph al_paths;

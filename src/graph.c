@@ -57,6 +57,20 @@ void am_graph_2paths(am_graph graph, am_graph *result) {
 	result->matrix = C.data;
 }
 
+void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges) {
+	int i, j, updated;
+	for (i = 0; i < graph.n; i++) {
+		updated = 0;
+		for (j = 0; j < graph.n; j++) {
+			if (graph.matrix[i*graph.n + j] > graph.matrix[i*graph.n + heaviest_edges[i]]) {
+				heaviest_edges[i] = j;
+				updated = 1;
+			}
+		}
+		if (!updated) heaviest_edges[i] = -1;
+	}
+}
+
 void al_graph_init(al_graph *graph, int m, int n) {
 	graph->m = m;
 	graph->n = n;

@@ -23,6 +23,7 @@ void am_graph_init(am_graph *graph, int m, int n);
 void am_graph_read(const char *filename, am_graph *graph);
 void am_graph_print(am_graph graph);
 void am_graph_2paths(am_graph graph, am_graph *result);
+void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges);
 
 void al_graph_init(al_graph *graph, int m, int n);
 void al_graph_read(const char *filename, al_graph *graph);
