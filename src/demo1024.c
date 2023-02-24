@@ -2,9 +2,10 @@
 #include <time.h>
 
 #include "graph.h"
+#include "words.h"
 
 int main(int argc, char* argv[]) {
-	float start, mat_time, list_time;
+	clock_t start, mat_time, list_time;
 
 	puts("reading to amatrix");
 	am_graph am;
@@ -16,21 +17,22 @@ int main(int argc, char* argv[]) {
 	al_graph_print(al);
 	
 	puts("\ncalculating 2paths amatrix");
-	start = (float) clock();
+	start = clock();
 	puts("\nadjacency matrix two-paths");
 	am_graph am_paths;
 	am_graph_2paths(am, &am_paths);
-	mat_time = ((float) clock() - start)/1000.0f;
-	printf("took %f seconds\n", mat_time);
+	mat_time = clock() - start;
+	printf("took %f seconds\n", ((float) mat_time)/CLOCKS_PER_SEC);
 
 	puts("\ncalculating 2paths alist");
-	start = (float) clock();
+	start = clock();
 	al_graph al_paths;
 	al_graph_2paths(al, &al_paths);
-	list_time = ((float) clock() - start)/1000.0f;
-	printf("took %f seconds\n", list_time);
+	list_time = clock() - start;
+	printf("took %f seconds\n", ((float) list_time)/CLOCKS_PER_SEC);
 
-	printf("The adjacency list algorithm was %f times faster", mat_time / list_time);	
+	printf("The adjacency list algorithm was %f times faster\n", 
+			((float)mat_time / CLOCKS_PER_SEC) / ((float) list_time / CLOCKS_PER_SEC));	
 
 	return 0;
 }
