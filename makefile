@@ -15,7 +15,7 @@ test/bin/words: build/words.o test/build/runwords.o
 bin/demo16: build/graph.o build/demo16.o build/matrix.o
 	cc -o $@ $^
 
-bin/demo1024: build/graph.o build/demo1024.o build/matrix.o
+bin/demo1024: build/graph.o build/demo1024.o build/matrix.o build/words.o
 	cc -o $@ $^
 
 bin/debug: build/graph.debug.o build/main.debug.o build/matrix.debug.o
