@@ -117,6 +117,7 @@ void al_graph_read(const char *filename, al_graph *graph) {
 
 void al_graph_print(al_graph graph) {
 	int i, j;
+	puts("node: (edge,weight)");
 	for (i = 0; i < graph.n; i++) {
 		printf("%4i: ", i+1);
 		for (j = 0; j < graph.num_edges[i]; j++) {
