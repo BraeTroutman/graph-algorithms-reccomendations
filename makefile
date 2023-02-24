@@ -4,9 +4,12 @@ targets=bin/demo16 bin/demo1024
 all: $(targets)
 
 debug: bin/debug
-tests: test/bin/strassens
+tests: test/bin/strassens test/bin/words
 
 test/bin/strassens: build/matrix.o test/build/strassens.o
+	cc -o $@ $^
+
+test/bin/words: build/words.o test/build/runwords.o
 	cc -o $@ $^
 
 bin/demo16: build/graph.o build/demo16.o build/matrix.o
