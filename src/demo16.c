@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	am_graph_print(am_paths);
 	
 	int i, *reccs = calloc(am_paths.n, sizeof(int));
-	am_graph_heaviest_edges(am_paths, reccs);
+	am_graph_heaviest_edges(am_paths, reccs, 1);
 	puts("\nadjacency matrix reccomendations (heaviest edges per node)");
 	for (i = 0; i < am_paths.n; i++) printf("node %i's heaviest node is %i\n", i+1, reccs[i]+1);
 
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	al_graph al_paths;
 	al_graph_2paths(al, &al_paths);
 	al_graph_print(al_paths);
-	al_graph_heaviest_edges(al_paths, reccs);
+	al_graph_heaviest_edges(al_paths, reccs, 1);
 	puts("\nadjacency list reccomendations (heaviest edges per node");
 	for (i = 0; i < am_paths.n; i++) printf("node %i's heaviest node is %i\n", i+1, reccs[i]+1);
 

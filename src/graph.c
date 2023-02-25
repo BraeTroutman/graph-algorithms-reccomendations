@@ -61,7 +61,7 @@ void am_graph_2paths(am_graph graph, am_graph *result) {
 	result->matrix = C.data;
 }
 
-void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges) {
+void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges, int exclude_self) {
 	int i, j;
 	int max_edge, max_weight;
 	int src_edges_idx;
@@ -70,6 +70,7 @@ void am_graph_heaviest_edges(am_graph graph, int *heaviest_edges) {
 		max_edge = -1; 
 		max_weight = 0;
 		for (j = 0; j < graph.n; j++) {
+			if (exclude_self && i == j) continue;
 			// check if weight at this edge is bigger than current max
 			if (graph.matrix[i*graph.n + j] > max_weight) {
 				max_weight = graph.matrix[i*graph.n + j];
@@ -187,7 +188,7 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 	}
 }
 
-void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges) {
+void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges, int exclude_self) {
 	int i, j;
 	int max_edge, max_weight;
 	int src_edges_idx;
@@ -197,6 +198,7 @@ void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges) {
 		max_edge = -1; 
 		max_weight = 0;
 		for (j = 0; j < graph.num_edges[i]; j++) {
+			if (exclude_self && i == j) continue;
 			// check if weight at this edge is bigger than current max
 			if (graph.weights[src_edges_idx+j] > max_weight) {
 				max_weight = graph.weights[src_edges_idx+j];
