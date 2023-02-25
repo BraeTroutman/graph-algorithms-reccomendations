@@ -28,8 +28,9 @@ int main(int argc, char* argv[]) {
 	al_graph_2paths(al, &al_paths);
 	al_graph_print(al_paths);
 	al_graph_heaviest_edges(al_paths, reccs, 1);
-	puts("\nadjacency list reccomendations (heaviest edges per node");
-	for (i = 0; i < am_paths.n; i++) printf("node %i's heaviest node is %i\n", i+1, reccs[i]+1);
+	FILE *out = fopen("data/out/recc16.txt", "w");
+	for (i = 0; i < am_paths.n; i++) fprintf(out, "%i\n", reccs[i]+1);
+	fclose(out);
 
 	return 0;
 }
