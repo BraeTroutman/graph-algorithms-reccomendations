@@ -143,7 +143,7 @@ void strassens(matrix A, matrix B, matrix C) {
 	addmat(temp2, M6, C22);
 }
 
-void addmat(matrix a, matrix b, matrix c) {
+static void addmat(matrix a, matrix b, matrix c) {
 	int i,j;
 	for (i = 0; i < c.n; i++) {
 		for (j = 0; j < c.n; j++) {
@@ -152,7 +152,7 @@ void addmat(matrix a, matrix b, matrix c) {
 	}
 }
 
-void submat(matrix a, matrix b, matrix c) {
+static void submat(matrix a, matrix b, matrix c) {
 	int i,j;
 	for (i = 0; i < c.n; i++) {
 		for (j = 0; j < c.n; j++) {
@@ -173,7 +173,7 @@ void initmat(matrix* M, int* data, int N, int n, int row_offset, int col_offset)
 	M->col_offset = col_offset;
 }
 
-void partition(matrix M, matrix *M11, matrix *M12, matrix *M21, matrix *M22) {
+static void partition(matrix M, matrix *M11, matrix *M12, matrix *M21, matrix *M22) {
 	int n = M.n / 2;
 	initmat(M11, M.data, M.N, n, M.row_offset, M.col_offset);
 	initmat(M12, M.data, M.N, n, M.row_offset, M.col_offset + n);
