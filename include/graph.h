@@ -30,6 +30,7 @@ void al_graph_read(const char *filename, al_graph *graph);
 void al_graph_print(al_graph graph);
 void al_graph_2paths(al_graph graph, al_graph *result);
 void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges, int exclude_self);
+int  al_graph_edge_exists(al_graph graph, int u, int v);
 
 #endif
 

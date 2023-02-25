@@ -209,3 +209,14 @@ void al_graph_heaviest_edges(al_graph graph, int *heaviest_edges, int exclude_se
 	}
 }
 
+int al_graph_edge_exists(al_graph graph, int u, int v) {
+	int node = graph.nodes[u];
+
+	int i;
+	for (i = 0; i < graph.num_edges[u]; i++) {
+		if (graph.edges[u + i] == v) return 1;
+	}
+
+	return 0;
+}
+
