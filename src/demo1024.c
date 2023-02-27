@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
 	start = clock();
 	puts("\nadjacency matrix two-paths");
 	am_graph am_paths;
-	//am_graph_2paths(am, &am_paths);
+	am_graph_2paths(am, &am_paths);
 	mat_time = clock() - start;
 	printf("took %f seconds\n", ((float) mat_time)/CLOCKS_PER_SEC);
 
