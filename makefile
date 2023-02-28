@@ -18,7 +18,7 @@ bin/demo16: build/graph.o build/demo16.o build/matrix.o
 bin/demo1024: build/graph.o build/demo1024.o build/matrix.o build/words.o
 	cc -o $@ $^
 
-bin/debug: build/graph.debug.o build/main.debug.o build/matrix.debug.o
+bin/debug: build/graph.debug.o build/demo1024.debug.o build/matrix.debug.o
 	cc -o $@ -g $^
 
 build/%.debug.o: src/%.c
