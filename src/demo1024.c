@@ -5,7 +5,7 @@
 #include "words.h"
 
 void calculate_reccomendations_exclusive(al_graph paths, al_graph original) {
-	FILE *out = fopen("data/out/exclusive/rec1024.txt", "w");
+	FILE *out = fopen("data/out/rec1024.txt", "w");
 	
 	int i, j;
 
@@ -73,7 +73,6 @@ int main(int argc, char* argv[]) {
 			((float)mat_time / CLOCKS_PER_SEC) / ((float) list_time / CLOCKS_PER_SEC));	
 	
 	calculate_reccomendations_exclusive(al_paths, al);
-	calculate_reccomendations_inclusive(al_paths);
 
 	return 0;
 }
