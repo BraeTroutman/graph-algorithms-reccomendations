@@ -133,13 +133,11 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 	int i, j, k, m = 0;
 	int src, nbr, dst;
 
-	char visited[graph.n];
-	
+	int visited[graph.n];
+	for (i = 0; i < graph.n; i++) visited[i] = 0;
+
 	// for every node in our graph
 	for (src = 0; src < graph.n; src++) {
-		// initially we've visited no 2-path neighbors
-		for (i = 0; i < graph.n; i++) visited[i] = 0;
-		
 		// for every neighbor of the current source node
 		for (j = 0; j < graph.num_edges[src]; j++) {
 			nbr = graph.edges[graph.nodes[src]+j];
@@ -153,6 +151,15 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 					m++;
 					visited[dst] = 1;
 				}
+			}
+		}
+		
+		// reset visited to all zeroes, only checking the values we know we updated
+		for (j = 0; j < graph.num_edges[src]; j++) {
+			nbr = graph.edges[graph.nodes[src]+j];
+			for (k = 0; k < graph.num_edges[nbr]; k++) {
+				dst = graph.edges[graph.nodes[nbr]+k];
+				visited[dst] = 0;
 			}
 		}
 	}
@@ -177,12 +184,17 @@ void al_graph_2paths(al_graph graph, al_graph *result) {
 		}
 		// fill our array with our calculated edge/weight pairs
 		result->nodes[src] = edgeidx;
-		for (i = 0; i < graph.n; i++) {
-			if (visited[i]) {
-				result->edges[edgeidx] = i;
-				result->weights[edgeidx] = visited[i];
-				result->num_edges[src]++;
-				edgeidx++;
+		for (j = 0; j < graph.num_edges[src]; j++) {
+			nbr = graph.edges[graph.nodes[src]+j];
+			for (k = 0; k < graph.num_edges[nbr]; k++) {
+				dst = graph.edges[graph.nodes[nbr]+k];
+				if (visited[dst]) {
+					result->edges[edgeidx] = dst;
+					result->weights[edgeidx] = visited[dst];
+					visited[dst] = 0;
+					result->num_edges[src]++;
+					edgeidx++;
+				}
 			}
 		}
 	}
