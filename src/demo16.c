@@ -56,6 +56,9 @@ int main(int argc, char* argv[]) {
 	printf("adjacency list 2 paths took %f seconds to calculate\n", 
 			(float) lst_time / CLOCKS_PER_SEC);
 	printf("adjacency list was %.2fx faster\n", (float) mat_time / (float) lst_time);
+	
+	al_graph_print(al_paths);
+	am_graph_print(am_paths);
 
 	calculate_reccomendations_exclusive(al_paths, al);
 
